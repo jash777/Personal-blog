@@ -1,0 +1,65 @@
+<!-- templates/post1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AlphaSec | Blog Post 1</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles_post.css') }}">
+</head>
+<body>
+  <section class="title container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Docker Security Best Practices</h1><br><br>
+      </div>
+    </div>
+  </section>
+  <!-- Blog Post Content -->
+   <div class="container">
+    <div class="row">
+      <div class="col-md-12 item">
+        <div class="item-in">
+          <p>Here are some Docker security best practices:</p>
+          <ul>
+            <!-- ... Other list items ... -->
+            <li>Avoid running Docker containers as the root user to minimize potential vulnerabilities. Instead, create a non-privileged user specifically for running Docker containers.
+             </li><li>When using Docker images, prefer those that support non-privileged users. To run a container with a non-privileged user, you can use the following command:</li> 
+              <pre><code class="bash">docker run -u alpha -it --rm imagename /bin/bash</code></pre>
+            </li>
+            <li>Disable root user access to further enhance security. You can do this by changing the shell for the root user to nologin:
+              <pre><code class="bash">chsh -s /usr/sbin/nologin root</code></pre>
+            </li>
+            <li>Avoid running Docker containers in privileged mode unless explicitly required. Privileged mode allows a container to access the host's devices, which can pose security risks. Instead, use non-privileged containers and consider using the --security-opt=no-new-privileges flag to prevent privilege escalation attacks. Example:
+              <pre><code class="bash">docker run -it --rm --security-opt=no-new-privileges imageid /bin/bash
+              </code></pre>
+            </li>
+            <li>Always choose lightweight Linux distributions for your Docker images, such as Alpine or Ubuntu, to reduce the attack surface and minimize potential security vulnerabilities.</li>
+            <!-- ... Other list items ... -->
+
+            <h2>Kernel Level Security:</h2>
+            <li>Use capabilities to restrict container privileges. For instance, you can drop all capabilities and selectively add certain ones as needed. The following command drops all capabilities and adds NET_ADMIN capability:</li>
+            <pre><code class="bash">docker run --cap-drop all --cap-add NET_ADMIN -it --rm -u alpha imagename /bin/bash
+            </code></pre>
+          <li>
+            Implement temporary filesystems to prevent unauthorized changes to sensitive data within containers. Use the --read-only flag to make the container's root file system read-only, and utilize the --tmpfs flag to mount specific directories as temporary file systems. Example:
+          </li>
+          <pre><code class="bash">docker run --read-only --tmpfs /opt -u alpha -it --rm Cname /bin/bash
+          </code></pre>
+          <li>
+            For better container isolation between intercommunication, consider using Docker networks. By default, containers within the same bridge network can communicate with each other. To disable intercommunication between containers, you can create a custom bridge network and run containers within it:
+          </li>
+          <pre><code class="bash"> docker network create --driver bridge test-net
+            docker run -it --network test-net imagename
+            </code></pre>
+          </ul>
+
+          <!-- ... Rest of the content ... -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
