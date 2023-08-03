@@ -15,5 +15,9 @@ def post1():
 def post2():
     return render_template('post2.html')
 
+@app.route('/post3')
+def post3():
+    return render_template('post3.html')
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=True,host='0.0.0.0')

@@ -8,6 +8,18 @@
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<style>
+  .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      text-align: right;
+      padding: 10px;
+      font-size: small;
+    }
+</style>
 <body>
   <section class="title container">
     <div class="row">
@@ -34,9 +46,9 @@
       </div>
       <div class="col-md-6 item">
         <div class="item-in">
-          <h4>Linux Hadrening | Docker </h4>
+          <h4>Docker Host Security Best Practices</h4>
           <div class="seperator"></div>
-          <p>Hardening the linux machine mainly for docker Environemnt</p>
+          <p>Docker has revolutionized containerization,providing efficient and scalable solutions for deploying applications.</p>
           <a href="{{ url_for('post2') }}">Read More
             <i class="fa fa-long-arrow-right"></i>
           </a>
@@ -44,7 +56,19 @@
           
         </div>
         
+        
       </div>
+      <div class="col-md-6 item">
+        <div class="item-in">
+          <h4>Linux Hadening </h4>
+          <div class="seperator"></div>
+          <p>hardening Linux machine | Best Practices</p>
+          <a href="{{ url_for('post3') }}">Read More
+            <i class="fa fa-long-arrow-right"></i>
+          </a>
+
+          
+        </div>
 <div>
 
   
@@ -113,6 +137,10 @@
       </div>
     </div>
   </footer> -->
+    <!-- Footer -->
+    <div class="footer">
+      written by: Alpha(J)
+    </div>
   </body>
   
   </html>
