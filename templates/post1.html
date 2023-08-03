@@ -7,11 +7,65 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles_post.css') }}">
+
+
+  <style>
+    .container {
+      position: relative;
+    }
+    .love-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: transparent;
+      color: #f77373;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ee4545;
+      transition: background-color 0.2s ease;
+    }
+    .love-button:hover {
+      background-color: #ff6666;
+      color: #fff;
+      border-color: #ff6666;
+    }
+    .love-button.bounce {
+      animation: bounceAnimation 0.5s ease;
+    }
+    @keyframes bounceAnimation {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-15px);
+      }
+      60% {
+        transform: translateY(-8px);
+      }
+    }
+    .date-section {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #c0d9f0;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
+  <div class="date-section">
+    Date: July 31, 2023 <!-- Replace this with the desired date -->
+  </div>
   <section class="title container">
     <div class="row">
       <div class="col-md-12">
+
         <h1>Docker Security Best Practices</h1><br><br>
       </div>
     </div>
@@ -21,8 +75,9 @@
     <div class="row">
       <div class="col-md-12 item">
         <div class="item-in">
-          <p>Here are some Docker security best practices:</p>
+          
           <ul>
+            <p style="font-size: large;">Here are some Docker security best practices:</p>
             <!-- ... Other list items ... -->
             <li>Avoid running Docker containers as the root user to minimize potential vulnerabilities. Instead, create a non-privileged user specifically for running Docker containers.
              </li><li>When using Docker images, prefer those that support non-privileged users. To run a container with a non-privileged user, you can use the following command:</li> 
@@ -35,6 +90,7 @@
               <pre><code class="bash">docker run -it --rm --security-opt=no-new-privileges imageid /bin/bash
               </code></pre>
             </li>
+            
             <li>Always choose lightweight Linux distributions for your Docker images, such as Alpine or Ubuntu, to reduce the attack surface and minimize potential security vulnerabilities.</li>
             <!-- ... Other list items ... -->
 
@@ -59,7 +115,16 @@
         </div>
       </div>
     </div>
+    <div class="love-button" onclick="handleClick()">
+      <i class="fa fa-heart"></i> <!-- Replace this with the Font Awesome heart icon class -->
+    </div>
   </div>
-
+  <script>
+    function handleClick() {
+      const loveButton = document.querySelector('.love-button');
+      loveButton.classList.add('bounce');
+      setTimeout(() => loveButton.classList.remove('bounce'), 500);
+    }
+  </script>
 </body>
 </html>
