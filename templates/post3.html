@@ -56,30 +56,77 @@
       padding: 5px 10px;
       border-radius: 5px;
     }
+
+    .back-home {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .back-home a {
+      text-decoration: none;
+      padding: 5px 10px;
+      background-color: #88bff1;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .back-home a:hover {
+      background-color: #0056b3;
+    }
+    
   </style>
 </head>
 <body>
+
+
+
+
   <div class="date-section">
-    Date: July 31, 2023 <!-- Replace this with the desired date -->
+    Date: 25-AUG-2023 <!-- Replace [Current Date] with the current date when the content is published -->
   </div>
   <section class="title container">
     <div class="row">
       <div class="col-md-12">
-
-        <h1>Linux Hardening  Best Practices</h1><br><br>
+        <h1>Linux Hardening Best Practices</h1><br><br>
       </div>
     </div>
   </section>
   <!-- Blog Post Content -->
   <div class="container">
     <div class="row">
-        <div class="col-md-12 item">
-          <div class="item-in">
-
-
+      <div class="col-md-12 item">
+        <div class="item-in">
+          <h2>Top 20 Linux Hardening Tips</h2> <br>
+          <ol>
+            <li>Keep your system updated to mitigate known vulnerabilities.</li>
+            <li>Minimize the number of installed packages to reduce potential attack vectors.</li>
+            <li>Enforce strong user account management practices, including strong passwords and account lockouts.</li>
+            <li>Configure strict password policies using PAM (Pluggable Authentication Modules).</li>
+            <li>Implement the principle of least privilege across all user permissions and use 'sudo' for administrative access.</li>
+            <li>Secure SSH access by disabling root logins, using key-based authentication, and changing the default port.</li>
+            <li>Enable a robust firewall with 'iptables' or 'firewalld', only allowing necessary ports.</li>
+            <li>Deploy security modules like AppArmor or SELinux for mandatory access controls.</li>
+            <li>Turn off any network services that are not in use.</li>
+            <li>Use 'auditd' to set up a system auditing mechanism.</li>
+            <li>Regularly apply security patches to the Linux kernel.</li>
+            <li>Encrypt data communication for remote connections.</li>
+            <li>Ensure file permissions are secure and regularly audited with 'chmod' and 'chown'.</li>
+            <li>Conduct regular data backups to protect against data loss.</li>
+            <li>Employ security extensions and TCP wrappers to enhance security.</li>
+            <li>Utilize host intrusion detection systems like AIDE or Tripwire.</li>
+            <li>Control access to cron jobs and review them for security implications.</li>
+            <li>Use 'sysctl' for kernel hardening and disable unneeded kernel modules.</li>
+            <li>Perform regular security scans with tools like ClamAV and Lynis.</li>
+            <li>Have an incident response plan ready for security breaches.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="container">
+        <div class="back-home">
+          <a href="/" class="btn btn-primary">Back Home</a>
         </div>
       </div>
     </div>
+    
+  </div>  
     <div class="love-button" onclick="handleClick()">
       <i class="fa fa-heart"></i> <!-- Replace this with the Font Awesome heart icon class -->
     </div>

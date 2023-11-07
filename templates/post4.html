@@ -1,0 +1,155 @@
+<!-- templates/post1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AlphaSec | Email Verification Vulnerability Alert</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles_post.css') }}">
+
+  <!-- Additional styles here -->
+  <style>
+    .container {
+      position: relative;
+    }
+    .love-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: transparent;
+      color: #f77373;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ee4545;
+      transition: background-color 0.2s ease;
+    }
+    .love-button:hover {
+      background-color: #ff6666;
+      color: #fff;
+      border-color: #ff6666;
+    }
+    .love-button.bounce {
+      animation: bounceAnimation 0.5s ease;
+    }
+    @keyframes bounceAnimation {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-15px);
+      }
+      60% {
+        transform: translateY(-8px);
+      }
+    }
+    .date-section {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #c0d9f0;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .back-home {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .back-home a {
+      text-decoration: none;
+      padding: 5px 10px;
+      background-color: #88bff1;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .back-home a:hover {
+      background-color: #0056b3;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="date-section">
+    Date: 7-SEP-2023
+  </div>
+  <section class="title container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Email Verification Vulnerability: A Call to Tighten Security Measures</h2><br><br>
+      </div>
+    </div>
+  </section>
+  <!-- Blog Post Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 item">
+        <div class="item-in">
+            <div class="blog-post">
+                    <h3>Email Verification Bypass Vulnerability Uncovered</h3>
+                </header>
+                <article class="post-content">
+                    <section class="vulnerability-summary">
+                        <h4>Summary of the Issue</h4>
+                        <p>A significant security vulnerability has been discovered on the FMS-Garuda platform (https://redicted.net) that allows attackers to bypass the email verification process. This flaw makes it possible to verify any email address without access to the email account, leading to unauthorized account access and potential data breaches.</p>
+                    </section>
+                    
+                    <section class="vulnerability-details">
+                        <h4>Detailed Breakdown</h4>
+                        <p>The vulnerability is quite straightforward to exploit:</p>
+                        <ol>
+                            <li>A new account is registered with a legitimate email address, such as vulnarablemail@gmail.com.</li>
+                            <li>A verification email is sent with a URL: https://fms-garuda.ddns.net/user/verify/originalmail@gmail.com.</li>
+                            <li>An attacker can then modify this URL, replacing the original email with any other, like targetemail@example.com.</li>
+                            <li>Upon accessing the modified URL, the new email address is verified without needing access to its inbox.</li>
+                        </ol>
+                        <p>This vulnerability has been tested and confirmed, posing a severe security risk.</p>
+                    </section>
+                    
+                    <section class="vulnerability-impact">
+                        <h4>Potential Impact</h4>
+                        <p>The implications of this vulnerability are severe:</p>
+                        <ul>
+                            <li><strong>Unauthorized Email Verification:</strong> Attackers can verify ownership of any email address without actual access to the email account.</li>
+                            <li><strong>Account Takeover Risks:</strong> By guessing or knowing other users' email addresses, attackers could reset passwords and take over accounts.</li>
+                            <li><strong>Erosion of Trust:</strong> Users' trust in the platform's security measures could be significantly undermined.</li>
+                        </ul>
+                    </section>
+                    
+                    <section class="recommendations">
+                        <h4>Recommendations for Mitigation</h4>
+                        <p>To mitigate this vulnerability, the following measures are strongly recommended:</p>
+                        <ul>
+                            <li>Implement unique, non-predictable tokens for each email verification attempt.</li>
+                            <li>Ensure tokens are tied to the user's email and expire after a set period or once used.</li>
+                            <li>Introduce monitoring for multiple failed verification attempts and rate limiting to prevent brute force attacks.</li>
+                        </ul>
+                    </section>
+                    
+                   
+        </div>
+      </div>
+      <div class="container">
+        <div class="back-home">
+          <a href="/" class="btn btn-primary">Back Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="love-button" onclick="handleClick()">
+      <i class="fa fa-heart"></i>
+    </div>
+  </div>
+  <script>
+    function handleClick() {
+      const loveButton = document.querySelector('.love-button');
+      loveButton.classList.add('bounce');
+      setTimeout(() => loveButton.classList.remove('bounce'), 500);
+    }
+  </script>
+</body>
+</html>
