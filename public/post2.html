@@ -1,0 +1,188 @@
+<!-- templates/post2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AlphaSec | Blog Post 2</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .container {
+      position: relative;
+    }
+    .love-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: transparent;
+      color: #f77373;
+      padding: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ee4545;
+      transition: background-color 0.2s ease;
+    }
+    .love-button:hover {
+      background-color: #ff6666;
+      color: #fff;
+      border-color: #ff6666;
+    }
+    .love-button.bounce {
+      animation: bounceAnimation 0.5s ease;
+    }
+    @keyframes bounceAnimation {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-15px);
+      }
+      60% {
+        transform: translateY(-8px);
+      }
+    }
+    .date-section {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #c0d9f0;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .back-home {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .back-home a {
+      text-decoration: none;
+      padding: 5px 10px;
+      background-color: #88bff1;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .back-home a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="date-section">
+    Date: August 1, 2023 <!-- Replace this with the desired date -->
+  </div>
+  <section class="title container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <h1>Docker Host Security Best Practices</h1>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ">
+        <p>Docker has revolutionized containerization, providing efficient and scalable solutions for deploying applications. However, as with any technology, it's essential to ensure the security of the host system running Docker. In this blog post, we'll explore some best practices to secure your Docker host environment effectively.</p>
+        <div class="col-md-12 item">
+          <div class="item-in">
+            <ul>
+              <!-- ... Other list items ... -->
+              <h4>1. Choose Minimal Linux Distro</h4><br>
+
+              <p style="font-size: medium;">The choice of the Linux distribution for your Docker host matters significantly. Opt for minimal distributions like Alpine, Ubuntu, or BusyBox. These distributions have smaller footprints, reducing the attack surface and potential vulnerabilities.</p>
+              <br>
+              <h4>2. Keep Your OS Hardened and Up-to-Date</h4>
+              <p style="font-size: medium;">Regularly harden your operating system by applying the latest security updates and patches. 
+                Use Unattended-upgrades for automatically update your operating system . A well-maintained and up-to-date OS ensures that known vulnerabilities are addressed promptly.</p>
+              <pre> <code class="bash"> sudo apt install unattended-upgrades -y</code></pre>
+              <br>
+              <h4>3. Audit Your OS with Lynis</h4>
+              <p style="font-size: medium;">Lynis is an excellent auditing tool for Linux systems. Install Lynis using apt:</p>
+              <pre><code class="bash"> sudo apt install lynis</code></pre>
+              <p style="font-size: medium;">Run the system audit: </p>
+              <pre><code class="bash"> sudo lynis audit system   </code></pre>
+              <p style="font-size: medium;">Lynis will perform security checks on your OS and provide recommendations to further secure your system.
+              </p>
+              <h2>Host Security</h2>
+              <h4>4.User Account Configuration</h4>
+              <p style="font-size: medium;">Avoid granting root privileges to multiple user accounts. Instead, create a non-root user with limited privileges for day-to-day operations.
+
+                Create a new user:</p>
+                <pre><code class="bash"> useradd -c 'name' -m -s /bin/bash<br> passwd name</code></pre>
+                  <p style="font-size: medium;">Add the user to the sudo group to grant administrative access:
+                  </p>
+                  <pre><code class="bash"> usermod -aG sudo name                  </code></pre>
+<h4>5. Disable Root Logins</h4>
+<p style="font-size: medium;">To enhance security, disable root logins or change the root shell to /usr/sbin/nologin:</p>
+<pre><code class="bash"> sudo chsh root -s /usr/sbin/nologin
+</code></pre>
+
+<h2>Audit Rules for Docker Artifacts
+</h2><br>
+<p style="font-size: large;">Before we dive into auditing Docker artifacts, let's briefly understand the components of the Linux Audit framework:</p>
+<ul><li>auditd: The audit daemon, responsible for collecting audit events from the kernel and writing them to the audit log.
+</li>
+<li>audit log: The location where the audit daemon stores audit events. Usually, this is found in /var/log/audit/audit.log.</li>
+
+<li>auditctl: A command-line tool used to control the behavior of the audit daemon, such as adding or removing rules.
+</li>
+<li>audit.rules: The file that contains rules specifying what activities to audit and what actions to take when audit events occur.</li></ul>
+<div style="margin-bottom: 15px;"></div>
+<p style="font-size: large;">Creating Audit Rules for Docker Artifacts</p>
+<p style="font-size: medium;">
+To audit Docker artifacts effectively, we'll use the audit.rules file to define specific rules. For instance, suppose we have received warnings from running docker-bench-security regarding configurations related to Docker files and directories, such as /etc/docker.
+</p>
+<p style="font-size: medium;">Here's how you can create an audit rule to monitor changes in the /etc/docker directory:</p>
+<pre><code class="bash"> sudo auditctl -w /etc/docker -k docker</code></pre>
+<p style="font-size: medium;">This command adds a watch rule (-w) for the /etc/docker directory and associates it with a unique key (-k) named "docker."
+Repeat the process for each warning received from docker-bench-security. Customize the command accordingly to monitor different paths and generate unique keys for each rule.</p>
+              
+<p style="font-size: medium;"> Listing Audit Rules</p>
+<pre><code class="bash"> sudo auditctl -l</code></pre>
+<p style="font-size: large;"> Adding Rules to audit.rules File</p>
+<p style="font-size: medium;"> For persistent rule configuration, it's a good practice to add the rules to the audit.rules file. This file is usually located at /etc/audit/rules.d/audit.rules. Open the file in a text editor and append the rules you created earlier.
+  <div style="margin-bottom: 15px;"></div>
+  Remember to restart the auditd service for the new rules to take effect:</p>
+<pre><code class="bash">sudo systemctl restart auditd</code></pre>
+<div style="margin-bottom: 15px;"></div>
+<p style="font-size: medium;"> Running docker-bench-security Again</p>
+
+<p style="font-size: medium;">
+With the audit rules in place, it's time to validate your Docker host's security once again using docker-bench-security. This tool will check if the warnings related to Docker artifacts have been mitigated or not. If everything is configured correctly, you should see a reduced number of warnings or none at all.</p>
+
+<h4> Conclusion</h4>
+<p style="font-size: medium;"> Securing your Docker host is a continuous process, and the Linux Audit framework plays a vital role in enhancing the overall security posture. By creating specific audit rules for Docker artifacts, you can gain valuable insights into the activities on your system and promptly respond to potential security issues. Remember to regularly review and update your audit rules as your Docker environment evolves, ensuring a robust and well-protected infrastructure.</p>
+
+</ul>
+  
+            <!-- ... Rest of the content ... -->
+          </div>
+        </div>
+        <div class="container">
+          <div class="back-home">
+            <a href="/" class="btn btn-primary">Back to Home</a>
+          </div>
+        </div>
+        <!-- Add the rest of the content for Blog Post 2 -->
+      </div>
+    </div>
+    <div class="love-button" onclick="handleClick()">
+      <i class="fa fa-heart"></i> <!-- Replace this with the Font Awesome heart icon class -->
+    </div>
+  </div>
+    <!-- Clap Button -->
+<script>
+      function handleClick() {
+        const loveButton = document.querySelector('.love-button');
+        loveButton.classList.add('bounce');
+        setTimeout(() => loveButton.classList.remove('bounce'), 500);
+      }
+    </script>
+</body>
+</html>
