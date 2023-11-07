@@ -14,7 +14,7 @@
     ],
     "env": {
       "VIRTUAL_ENV": "/vercel/path0/venv",
-      "PATH": "/vercel/path0/venv/bin:$PATH"
+      "PATH": "APP_PATH_ENV"
     }
   }
   
