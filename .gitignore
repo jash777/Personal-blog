@@ -23,3 +23,4 @@ terraform.tfstate.backup
 vercel.json
 .terraform/providers/registry.terraform.io/hashicorp/aws/5.10.0/windows_amd64/terraform-provider-aws_v5.10.0_x5.exe
 .terraform/providers/registry.terraform.io/hashicorp/null/3.2.1/windows_amd64/terraform-provider-null_v3.2.1_x5.exe
+.vercel
